@@ -2,8 +2,12 @@ import React from "react";
 
 export default function Container() {
   return (
-    <div id="container">
-      <h1>Ola mundo</h1>
-    </div>
+    <>
+      <div id="container">
+        Seja Bem Vindo
+        <br />
+        <strong>Selecione uma Cidade</strong>
+      </div>
+    </>
   );
 }
