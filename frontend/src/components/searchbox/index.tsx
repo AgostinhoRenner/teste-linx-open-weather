@@ -1,7 +1,13 @@
+import "./searchbox.css";
+
 import { useForm } from "react-hook-form";
 import { consultaClimaCidade } from "../../services/openWeather";
 
-export default function SearchBox() {
+interface SearchBoxProps {
+  setWeatherDataState: (data: any) => void;
+}
+
+export default function SearchBox({ setWeatherDataState }: SearchBoxProps) {
   const {
     register,
     handleSubmit,
@@ -9,7 +15,13 @@ export default function SearchBox() {
   } = useForm();
 
   const onSubmit = async (cidade: any) => {
-    const response = await consultaClimaCidade(cidade);
+    try {
+      const response = await consultaClimaCidade(cidade);
+      setWeatherDataState(response);
+    } catch (error) {
+      console.log(error); // Registra na ferramenta de log
+      alert("Ocorreu um problema com a requisição, verifique os logs");
+    }
   };
 
   return (
@@ -18,7 +30,7 @@ export default function SearchBox() {
         <p>
           Seja Bem Vindo
           <br />
-          <strong>Selecione uma Cidade</strong>
+          <strong>Pesquise sua Cidade</strong>
         </p>
         <div className="search-box">
           <input id="cidade" placeholder="Pesquise por uma cidade" {...register("cidade", { required: true })} />

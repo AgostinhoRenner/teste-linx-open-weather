@@ -1,17 +1,11 @@
-interface WeatherInfo {
-  weather: [{ icon: string }];
-  dt: Date;
-  main: { temp: number };
-  wind: { speed: number };
-  clouds: { all: number };
-}
-
-// 1. Interface para os dados de "Clouds"
 interface Clouds {
   all: number;
 }
 
-// 2. Interface para os dados de "Main"
+interface Sys {
+  pod: string;
+}
+
 interface Main {
   temp: number;
   feels_like: number;
@@ -24,7 +18,6 @@ interface Main {
   temp_kf: number;
 }
 
-// 3. Interface para o array de "Weather"
 interface Weather {
   id: number;
   main: string;
@@ -32,27 +25,48 @@ interface Weather {
   icon: string;
 }
 
-// 4. Interface para os dados de "Wind"
 interface Wind {
   speed: number;
   deg: number;
   gust: number;
 }
 
-// 5. Interface para os dados de "Sys"
-interface Sys {
-  pod: string;
-}
-
-// 6. Interface Principal para o Objeto de Previsão (ForecastItem)
 export interface ForecastItem {
   dt: number; // Timestamp (data/hora em segundos)
-  dt_txt: string; // Data/hora formatada
+  dt_txt: string;
   main: Main;
   weather: Weather[]; // <-- É um ARRAY de objetos Weather
   clouds: Clouds;
   wind: Wind;
   visibility: number;
   pop: number; // Probability of precipitation
-  sys: { pod: string };
+  sys: Sys;
+  rain?: Rain;
+}
+
+interface Coordinates {
+  lat: number;
+  lon: number;
+}
+
+interface City {
+  id: number;
+  name: string;
+  coord: Coordinates;
+  country: string;
+  population: number;
+  timezone: number;
+  sunrise: number;
+  sunset: number;
+}
+
+interface Rain {
+  "3h": number; // Propriedade com aspas precisa ser declarada como string
+}
+export interface WeatherData {
+  cod: string;
+  message: number;
+  cnt: number;
+  list: ForecastItem[]; // <-- O ARRAY principal de previsões!
+  city: Cidade;
 }

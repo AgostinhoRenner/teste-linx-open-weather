@@ -1,0 +1,43 @@
+
+input {
+  background-color: transparent;
+  border: none;
+  outline: none;
+  color: whitesmoke;
+}
+
+input::placeholder {
+  color: rgba(200, 200, 200, 0.7);
+}
+
+button {
+  background-color: transparent;
+  border: none;
+  outline: none;
+  color: whitesmoke;
+  border-radius: 20px;
+  width: 50px;
+}
+
+button:hover{
+  background-color: #5C3975;
+  cursor: pointer;
+}
+
+.search-box {
+  height: 10%;
+  display: flex;
+  flex: 1;
+  justify-content: space-between;
+  border-style: solid;
+  border-color: grey;
+  border-radius: 20px;
+  border-width: 0.1px;
+  padding: 0 10px;
+}
+
+.error-message {
+  color: red;
+  background-color: #54316d;
+  font-size: small;
+}

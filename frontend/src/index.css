@@ -1,5 +1,7 @@
 #root {
   max-width: 1280px;
+  height: 1024px;
+  width: 1280px;
   margin: 0 auto;
   padding: 2rem;
   text-align: center;
@@ -29,57 +31,14 @@ body {
   min-height: 100vh;
 }
 
-input {
-  background-color: transparent;
-  border: none;
-  outline: none;
-  color: whitesmoke;
-}
-
-input::placeholder {
-  color: rgba(200, 200, 200, 0.7);
-}
-
-button {
-  background-color: transparent;
-  border: none;
-  outline: none;
-  color: whitesmoke;
-}
-
 #container {
   display: flex;
+  align-self: center;
   border-style: solid;
   border-color: grey;
   border-radius: 10px;
   border-width: 0.1px;
   overflow: hidden;
+  height: 70%;
 }
 
-#home {
-  display: flex;
-  flex-direction: column;
-  flex: 1;
-  justify-content: space-between;
-  background-color: #4b2b61;
-  border-radius: 15px;
-  margin: 5px;
-  padding: 5px;
-}
-
-.search-box {
-  height: 50px;
-  display: flex;
-  flex: 1;
-  justify-content: center;
-  border-style: solid;
-  border-color: grey;
-  border-radius: 10px;
-  border-width: 0.1px;
-}
-
-.error-message {
-  color: red;
-  background-color: #54316d;
-  font-size: small;
-}

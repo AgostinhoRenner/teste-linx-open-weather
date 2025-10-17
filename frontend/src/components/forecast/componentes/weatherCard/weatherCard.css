@@ -11,6 +11,10 @@
   overflow: hidden;
 }
 
+.card-container:hover {
+  cursor: pointer;
+}
+
 .card-header {
   height: 40%;
   display: flex;
@@ -38,6 +42,11 @@
   font-size: 0.4rem;
   background-color: transparent;
   height: 20%;
+}
+
+.selected {
+  background-color: #593970;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
 img {

@@ -28,6 +28,6 @@ def get_clima_por_data(lista_datas: tuple) -> list:
     lista_limpa = []
     for item in lista_datas:
         data_afericao = datetime.fromtimestamp(item['dt'])
-        if data_afericao.hour >= 21:
+        if data_afericao.hour == 21:
             lista_limpa.append(item)
     return lista_limpa

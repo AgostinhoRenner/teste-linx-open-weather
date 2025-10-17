@@ -1,37 +1,48 @@
 import "./forecast.css";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
-import WeatherCards from "./componentes/weatherCards";
+import WeatherCard from "./componentes/weatherCard";
 import WeatherCardDetails from "./componentes/weatherCardDetails";
-import type { ForecastItem, WeatherInfo } from "./forecast";
 
-const diasDaSemana = ["Segunda-feira", "Terça-feira", "Quarta-feira", "Quinta-feira", "Sexta-feira"]
+import type { WeatherData, ForecastItem } from "./forecast";
 
-export default function Forecast() {
+export default function Forecast({ weatherData }: { weatherData: WeatherData | undefined }) {
   const [forecastData, setForecastData] = useState<ForecastItem[]>([]);
+  const [selectedCard, setSelectedCard] = useState<ForecastItem>();
+
+  const handleCardClick = (item: ForecastItem) => {
+    setSelectedCard(item);
+  };
+
+  useEffect(() => {
+    if (weatherData) {
+      setForecastData(weatherData.list);
+      setSelectedCard(weatherData.list[0]);
+    }
+  }, [weatherData]);
 
   return (
     <>
       <div id="forecast">
         {forecastData.length > 0 ? (
-          <div>
+          <>
             {forecastData.map((data) => (
-              <WeatherCards
+              <WeatherCard
                 key={data.dt}
-                codigoIcone={data.weather[0].icon}
-                diaSemana={diasDaSemana[new Date(data.dt).getDay()]}
-                tempKelvin={data.main.temp}
-                velocidadeVento={data.wind.speed}
-                nuvens={data.clouds.all}
+                data={data}
+                onCardClick={handleCardClick}
+                isSelected={selectedCard?.dt === data.dt}
               />
             ))}
-          </div>
+          </>
         ) : (
           <></>
         )}
       </div>
       <div>
-        <WeatherCardDetails />
+        {!!weatherData && selectedCard && (
+          <WeatherCardDetails weatherData={weatherData} forecastForecastItem={selectedCard} />
+        )}
       </div>
     </>
   );
