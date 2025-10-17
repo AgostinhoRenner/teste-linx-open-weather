@@ -1,7 +1,15 @@
+#root {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 2rem;
+  text-align: center;
+  text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
+}
+
 :root {
   font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
   font-weight: 400;
-  font-size: xx-large;
+  font-size: 2rem;
 
   color-scheme: light dark;
   color: rgba(255, 255, 255, 0.87);
@@ -32,21 +40,46 @@ input::placeholder {
   color: rgba(200, 200, 200, 0.7);
 }
 
-form button { 
+button {
   background-color: transparent;
   border: none;
   outline: none;
   color: whitesmoke;
 }
 
-.search-box {
-  height: 50px;
+#container {
   display: flex;
-  flex-direction: row;
-  justify-content: center;  
-  width: 90%;
   border-style: solid;
   border-color: grey;
   border-radius: 10px;
   border-width: 0.1px;
+  overflow: hidden;
+}
+
+#home {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  justify-content: space-between;
+  background-color: #4b2b61;
+  border-radius: 15px;
+  margin: 5px;
+  padding: 5px;
+}
+
+.search-box {
+  height: 50px;
+  display: flex;
+  flex: 1;
+  justify-content: center;
+  border-style: solid;
+  border-color: grey;
+  border-radius: 10px;
+  border-width: 0.1px;
+}
+
+.error-message {
+  color: red;
+  background-color: #54316d;
+  font-size: small;
 }

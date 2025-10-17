@@ -1,16 +1,16 @@
-import { useState } from "react";
-import "./App.css";
-
 import Container from "./components/container";
+import Home from "./components/home";
+import Forecast from "./components/forecast";
 import SearchBox from "./components/searchbox";
 
 function App() {
-  const [count, setCount] = useState(0);
-
   return (
     <>
-      <Container />
-      <SearchBox />
+      <Container>
+        <Home />
+        <SearchBox />
+        <Forecast />
+      </Container>
     </>
   );
 }

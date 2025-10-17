@@ -1,25 +1,32 @@
-import React, { useState } from "react";
-import consultaClimaCidade from "../../services/openWeather";
+import { useForm } from "react-hook-form";
+import { consultaClimaCidade } from "../../services/openWeather";
 
 export default function SearchBox() {
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm();
 
-  const [cidade, setCidade] = useState('');
+  const onSubmit = async (cidade: any) => {
+    const response = await consultaClimaCidade(cidade);
+  };
 
   return (
     <>
-      <div className="search-box">
-        <form action="submit" method="post">
-          <input
-            name="Cidade"
-            id="cidade"
-            placeholder="Pesquise por uma cidade"
-            value={cidade}
-            onInput={ e => setCidade(e.target.value)}
-          />
-          <button type="submit">
-            <i className="fa fa-search"></i>
+      <div>
+        <p>
+          Seja Bem Vindo
+          <br />
+          <strong>Selecione uma Cidade</strong>
+        </p>
+        <div className="search-box">
+          <input id="cidade" placeholder="Pesquise por uma cidade" {...register("cidade", { required: true })} />
+          {errors?.cidade?.type === "required" && <p className="error-message">Cidade precisa ser informada.</p>}
+          <button onClick={() => handleSubmit(onSubmit)()}>
+            <span className="fa fa-search"></span>
           </button>
-        </form>
+        </div>
       </div>
     </>
   );

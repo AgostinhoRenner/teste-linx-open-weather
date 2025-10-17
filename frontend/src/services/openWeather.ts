@@ -1,5 +1,7 @@
-import axios from "axios"
+import axios from "axios";
+const apiBaseUrl: string = import.meta.env.VITE_API_URL;
 
-export default function consultaClimaCidade(cidade:string){
-    axios.post("http://127.0.0.1:5000/weather", cidade);
+export async function consultaClimaCidade(cidade : JSON) {
+  const endpoint = "/weather";
+  return axios.post(apiBaseUrl + endpoint, cidade);
 }

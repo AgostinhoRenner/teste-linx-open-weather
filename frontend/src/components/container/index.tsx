@@ -1,12 +1,9 @@
 import React from "react";
-
-export default function Container() {
+export default function Container({ children }: React.PropsWithChildren) {
   return (
     <>
       <div id="container">
-        Seja Bem Vindo
-        <br />
-        <strong>Selecione uma Cidade</strong>
+        {children}
       </div>
     </>
   );

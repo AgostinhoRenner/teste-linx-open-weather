@@ -1,6 +1,7 @@
 import os
 
-from flask import Flask
+from flask import Flask, jsonify
+from flask_cors import CORS
 from dotenv import load_dotenv
 load_dotenv()
 
@@ -12,6 +13,7 @@ def create_app(test_config=None):
         SECRET_KEY='dev',
         DATABASE=os.path.join(app.instance_path, 'flaskr.sqlite'),
     )
+    CORS(app)
 
     if test_config is None:
         # load the instance config, if it exists, when not testing
@@ -38,4 +40,5 @@ def create_app(test_config=None):
 
     from .controllers import open_weather
     app.register_blueprint(open_weather.bp)
+    
     return app
