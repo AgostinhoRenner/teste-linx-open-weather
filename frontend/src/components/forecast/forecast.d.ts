@@ -35,11 +35,11 @@ export interface ForecastItem {
   dt: number; // Timestamp (data/hora em segundos)
   dt_txt: string;
   main: Main;
-  weather: Weather[]; // <-- É um ARRAY de objetos Weather
+  weather: Weather[]; 
   clouds: Clouds;
   wind: Wind;
   visibility: number;
-  pop: number; // Probability of precipitation
+  pop: number; 
   sys: Sys;
   rain?: Rain;
 }
@@ -61,12 +61,12 @@ interface City {
 }
 
 interface Rain {
-  "3h": number; // Propriedade com aspas precisa ser declarada como string
+  "3h": string; 
 }
 export interface WeatherData {
   cod: string;
   message: number;
   cnt: number;
-  list: ForecastItem[]; // <-- O ARRAY principal de previsões!
+  list: ForecastItem[];
   city: Cidade;
 }

@@ -43,6 +43,8 @@ Na pasta "backend" crie o arquivo .env `cd backend`:
 3. Abra o terminal e crie o ambiente virtual python `python -m venv .venv`
 4. Ative o ambiente virtual: `./.venv/Scripts/Activate.ps1`
 5. Rode a instalação das dependências: `pip install -r requirements.txt`
+6. Rode o comando `flask --app flaskr run`
+7. Copie o url http fornecido e coloque na variável de ambiente criada no passo 1 do frontend.
 
 Na pasta "frontend" crie o arquivo .env:
 
