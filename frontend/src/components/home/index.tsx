@@ -1,17 +1,23 @@
 import "./home.css";
+import { connect } from "react-redux";
+import { limpaEstado } from "../../store/actions/weatherActions";
 
-export default function Home() {
+interface homeProps {
+  cleanStateRedux: () => void;
+}
+
+function Home({ cleanStateRedux }: homeProps) {
   function getCurrentDate() {
     const date = new Date();
-    let dayOfMonth = date.getDate() > 10 ? date.getDate().toString() : `0${date.getDate()}`;
-    let month = date.getMonth() > 10 ? date.getMonth().toString() : `0${date.getMonth()}`;
-    return dayOfMonth.concat(":", month);
+    let dayOfMonth = date.getDate() > 8 ? (date.getDate() + 1).toString() : `0${date.getDate() + 1}`;
+    let month = date.getMonth() > 8 ? (date.getMonth() + 1).toString() : `0${date.getMonth() + 1}`;
+    return dayOfMonth.concat("/", month);
   }
 
   function getCurrentClock() {
     const date = new Date();
-    let hour = date.getHours() > 10 ? date.getHours().toString() : `0${date.getHours()}`;
-    let minute = date.getMinutes() > 10 ? date.getMinutes().toString() : `0${date.getMinutes()}`;
+    let hour = date.getHours() > 9 ? date.getHours().toString() : `0${date.getHours()}`;
+    let minute = date.getMinutes() > 9 ? date.getMinutes().toString() : `0${date.getMinutes()}`;
 
     return hour.concat(":", minute);
   }
@@ -19,7 +25,7 @@ export default function Home() {
   return (
     <div id="home">
       <div>Linx</div>
-      <span className="fas fa-house" />
+      <span onClick={() => cleanStateRedux()} className="fas fa-house" />
       <div id="calendar">
         <div id="date">{getCurrentDate()}</div>
         <div id="clock">{getCurrentClock()}</div>
@@ -27,3 +33,13 @@ export default function Home() {
     </div>
   );
 }
+
+function mapDispatchToProps(dispatch) {
+  return {
+    cleanStateRedux() {
+      const action = limpaEstado();
+      dispatch(action);
+    },
+  };
+}
+export default connect(null, mapDispatchToProps)(Home);

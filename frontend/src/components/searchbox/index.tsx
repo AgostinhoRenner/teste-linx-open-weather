@@ -2,12 +2,15 @@ import "./searchbox.css";
 
 import { useForm } from "react-hook-form";
 import { consultaClimaCidade } from "../../services/openWeather";
+import { connect } from "react-redux";
+
+import { atualizarWeatherData } from "../../store/actions/weatherActions";
 
 interface SearchBoxProps {
-  setWeatherDataState: (data: any) => void;
+  setWeatherDataRedux: (data: any) => void;
 }
 
-export default function SearchBox({ setWeatherDataState }: SearchBoxProps) {
+function SearchBox({  setWeatherDataRedux }: SearchBoxProps) {
   const {
     register,
     handleSubmit,
@@ -17,7 +20,8 @@ export default function SearchBox({ setWeatherDataState }: SearchBoxProps) {
   const onSubmit = async (cidade: any) => {
     try {
       const response = await consultaClimaCidade(cidade);
-      setWeatherDataState(response);
+      if (typeof response != "string") setWeatherDataRedux(response);
+      else alert(response);
     } catch (error) {
       console.log(error); // Registra na ferramenta de log
       alert("Ocorreu um problema com a requisição, verifique os logs");
@@ -25,21 +29,34 @@ export default function SearchBox({ setWeatherDataState }: SearchBoxProps) {
   };
 
   return (
-    <>
-      <div>
-        <p>
-          Seja Bem Vindo
-          <br />
-          <strong>Pesquise sua Cidade</strong>
-        </p>
-        <div className="search-box">
-          <input id="cidade" placeholder="Pesquise por uma cidade" {...register("cidade", { required: true })} />
-          {errors?.cidade?.type === "required" && <p className="error-message">Cidade precisa ser informada.</p>}
-          <button onClick={() => handleSubmit(onSubmit)()}>
-            <span className="fa fa-search"></span>
-          </button>
-        </div>
+    <div id="search-box-container">
+      <div id="search-box-header">
+        Seja Bem Vindo
+        <br />
+        <strong>Pesquise sua Cidade</strong>
       </div>
-    </>
+      <div id="search-box">
+        <input id="cidade" placeholder="Pesquise por uma cidade" {...register("cidade", { required: true })} />
+        <button onClick={() => handleSubmit(onSubmit)()}>
+          <span className="fa fa-search"></span>
+        </button>
+      </div>
+      {errors?.cidade?.type === "required" && <p className="error-message">Cidade precisa ser informada.</p>}
+    </div>
   );
 }
+
+function mapStateToProps(state) {
+  return { weatherData: state.weather.weatherData };
+}
+
+function mapDispatchToProps(dispatch) {
+  return {
+    setWeatherDataRedux(weatherData) {
+      const action = atualizarWeatherData(weatherData);
+      dispatch(action);
+    },
+  };
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(SearchBox);

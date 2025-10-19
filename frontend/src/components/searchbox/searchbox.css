@@ -1,9 +1,13 @@
-
 input {
+  min-height: 50px;
+  max-height: 80px;
+  height: 10%;
   background-color: transparent;
   border: none;
   outline: none;
   color: whitesmoke;
+  display: flex;
+  flex: 1;
 }
 
 input::placeholder {
@@ -19,21 +23,41 @@ button {
   width: 50px;
 }
 
-button:hover{
-  background-color: #5C3975;
+button:hover {
+  background-color: #7c5995;
   cursor: pointer;
 }
 
-.search-box {
-  height: 10%;
+#search-box-container {
+  min-height: 200px;
+  max-height: 300px;
+  min-width: 400px;
+  height: 30%;
+  width: 90%;
   display: flex;
-  flex: 1;
+  flex-direction: column;
+  margin: 20px;
+}
+
+#search-box-header {
+  margin: 5px;
+  align-items: flex-start;
+  display: flex;
+  flex-direction: column;
+}
+
+#search-box {
+  min-height: 50px;
+  max-height: 70px;
+  display: flex;
   justify-content: space-between;
   border-style: solid;
   border-color: grey;
   border-radius: 20px;
   border-width: 0.1px;
   padding: 0 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  background-color: #593970;
 }
 
 .error-message {

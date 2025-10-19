@@ -1,6 +1,6 @@
 #root {
   max-width: 1280px;
-  height: 1024px;
+  min-height: 666px;
   width: 1280px;
   margin: 0 auto;
   padding: 2rem;
@@ -29,16 +29,5 @@ body {
   place-items: center;
   min-width: 320px;
   min-height: 100vh;
-}
-
-#container {
-  display: flex;
-  align-self: center;
-  border-style: solid;
-  border-color: grey;
-  border-radius: 10px;
-  border-width: 0.1px;
-  overflow: hidden;
-  height: 70%;
 }
 

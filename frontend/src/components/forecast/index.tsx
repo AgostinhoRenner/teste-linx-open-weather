@@ -1,16 +1,24 @@
 import "./forecast.css";
 import { useEffect, useState } from "react";
+import { connect } from "react-redux";
 
 import WeatherCard from "./componentes/weatherCard";
-import WeatherCardDetails from "./componentes/weatherCardDetails";
+
+import { atualizarForecastData } from "../../store/actions/weatherActions";
 
 import type { WeatherData, ForecastItem } from "./forecast";
 
-export default function Forecast({ weatherData }: { weatherData: WeatherData | undefined }) {
-  const [forecastData, setForecastData] = useState<ForecastItem[]>([]);
+interface ForecastProps {
+  weatherData: WeatherData | undefined;
+  setForecastItemRedux: (data: any) => void;
+}
+
+function Forecast({ weatherData, setForecastItemRedux }: ForecastProps) {
+  const [forecastData, setForecastData] = useState<ForecastItem[] | undefined>([]);
   const [selectedCard, setSelectedCard] = useState<ForecastItem>();
 
   const handleCardClick = (item: ForecastItem) => {
+    setForecastItemRedux(item);
     setSelectedCard(item);
   };
 
@@ -18,13 +26,16 @@ export default function Forecast({ weatherData }: { weatherData: WeatherData | u
     if (weatherData) {
       setForecastData(weatherData.list);
       setSelectedCard(weatherData.list[0]);
+      setForecastItemRedux(weatherData.list[0]);
+    } else {
+      setForecastData(undefined);
     }
   }, [weatherData]);
 
   return (
     <>
       <div id="forecast">
-        {forecastData.length > 0 ? (
+        {!!forecastData && forecastData.length > 0 ? (
           <>
             {forecastData.map((data) => (
               <WeatherCard
@@ -39,11 +50,21 @@ export default function Forecast({ weatherData }: { weatherData: WeatherData | u
           <></>
         )}
       </div>
-      <div>
-        {!!weatherData && selectedCard && (
-          <WeatherCardDetails weatherData={weatherData} forecastForecastItem={selectedCard} />
-        )}
-      </div>
     </>
   );
 }
+
+function mapStateToProps(state) {
+  return { weatherData: state.weather.weatherData };
+}
+
+function mapDispatchToProps(dispatch) {
+  return {
+    setForecastItemRedux(forecastItem) {
+      const action = atualizarForecastData(forecastItem);
+      dispatch(action);
+    },
+  };
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Forecast);

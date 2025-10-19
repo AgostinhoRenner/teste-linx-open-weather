@@ -1,11 +1,16 @@
 #home {
   min-width: 80px;
-  width: 1%;
   display: flex;
+  flex: 1;
   flex-direction: column;
   justify-content: space-between;
-  background-color: #4b2b61;
+  background-color: #593970;
   border-radius: 15px;
   margin: 5px;
   padding: 5px;
+  box-shadow: 0 4px 4px rgba(0, 0, 0, 0.5);  
+}
+
+span{
+  cursor: pointer;
 }

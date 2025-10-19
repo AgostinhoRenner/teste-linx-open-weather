@@ -40,12 +40,12 @@ export default function WeatherCard({ data, onCardClick, isSelected }: WeatherCa
         onClick={() => onCardClick(data)} // <--- Adiciona o manipulador de clique
       >
         <div className="card-header">
-          <img src={icone} />
+          {!!icone && <img src={icone} />}
           <div>{diasDaSemana[new Date(data.dt * 1000).getDay()]}</div>
         </div>
         <div className="card-body">{temperatura}</div>
         <div className="card-footer">
-          <div>Vento m/s {data.wind.speed.toString()} </div>
+          <div>Vento m/s {data.wind.speed.toString().replace(".", ",")} </div>
           <div>Nuvens: {data.clouds.all.toString()}%</div>
         </div>
       </div>

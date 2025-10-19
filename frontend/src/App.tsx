@@ -1,20 +1,27 @@
-import Container from "./components/container";
+import { Container, Column, Row } from "./components/container";
 import Home from "./components/home";
-import Forecast from "./components/forecast";
 import SearchBox from "./components/searchbox";
-import { useState } from "react";
-
-import type { WeatherData } from "./components/forecast/forecast";
+import Forecast from "./components/forecast";
+import WeatherCardDetails from "./components/forecast/componentes/weatherCardDetails";
 
 function App() {
-  const [weatherData, setWeatherData] = useState<WeatherData>();
-
   return (
     <>
       <Container>
-        <Home />
-        <SearchBox setWeatherDataState={setWeatherData} />
-        {!!weatherData && <Forecast weatherData={weatherData} />}
+        <Column>
+          <Home />
+        </Column>
+        <Column>
+          <Row>
+            <SearchBox />
+          </Row>
+          <Row>
+            <Forecast />
+          </Row>
+        </Column>
+        <Column>
+          <WeatherCardDetails />
+        </Column>
       </Container>
     </>
   );
