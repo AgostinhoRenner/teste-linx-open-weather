@@ -4,10 +4,11 @@ import { connect } from "react-redux";
 import { converteKelvinCelsius, montaUrlIcone, getHoursFromTimeStamp, getDateFromTimeStamp } from "../utils";
 
 import type { ForecastItem, WeatherData } from "../../forecast";
+import type { RootState } from "../../../../store/reduxStoreTypes";
 
 interface WeatherCardDetailsProps {
-  weatherData: WeatherData;
-  forecastItem: ForecastItem;
+  weatherData: WeatherData | null;
+  forecastItem: ForecastItem | null;
 }
 
 function WeatherCardDetails({ weatherData, forecastItem }: WeatherCardDetailsProps) {
@@ -71,7 +72,7 @@ function WeatherCardDetails({ weatherData, forecastItem }: WeatherCardDetailsPro
   );
 }
 
-function mapStateToProps(state) {
+function mapStateToProps(state: RootState) {
   return { weatherData: state.weather.weatherData, forecastItem: state.forecast.forecastData };
 }
 

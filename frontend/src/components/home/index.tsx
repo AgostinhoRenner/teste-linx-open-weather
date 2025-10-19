@@ -1,6 +1,7 @@
 import "./home.css";
 import { connect } from "react-redux";
 import { limpaEstado } from "../../store/actions/weatherActions";
+import type { DispatchType } from "../../store/reduxStoreTypes";
 
 interface homeProps {
   cleanStateRedux: () => void;
@@ -34,7 +35,7 @@ function Home({ cleanStateRedux }: homeProps) {
   );
 }
 
-function mapDispatchToProps(dispatch) {
+function mapDispatchToProps(dispatch: DispatchType) {
   return {
     cleanStateRedux() {
       const action = limpaEstado();

@@ -7,14 +7,15 @@ import WeatherCard from "./componentes/weatherCard";
 import { atualizarForecastData } from "../../store/actions/weatherActions";
 
 import type { WeatherData, ForecastItem } from "./forecast";
+import type { DispatchType, RootState } from "../../store/reduxStoreTypes";
 
 interface ForecastProps {
-  weatherData: WeatherData | undefined;
+  weatherData: WeatherData | null;
   setForecastItemRedux: (data: any) => void;
 }
 
 function Forecast({ weatherData, setForecastItemRedux }: ForecastProps) {
-  const [forecastData, setForecastData] = useState<ForecastItem[] | undefined>([]);
+  const [forecastData, setForecastData] = useState<ForecastItem[] | null>([]);
   const [selectedCard, setSelectedCard] = useState<ForecastItem>();
 
   const handleCardClick = (item: ForecastItem) => {
@@ -28,7 +29,7 @@ function Forecast({ weatherData, setForecastItemRedux }: ForecastProps) {
       setSelectedCard(weatherData.list[0]);
       setForecastItemRedux(weatherData.list[0]);
     } else {
-      setForecastData(undefined);
+      setForecastData(null);
     }
   }, [weatherData]);
 
@@ -54,13 +55,13 @@ function Forecast({ weatherData, setForecastItemRedux }: ForecastProps) {
   );
 }
 
-function mapStateToProps(state) {
+function mapStateToProps(state: RootState) {
   return { weatherData: state.weather.weatherData };
 }
 
-function mapDispatchToProps(dispatch) {
+function mapDispatchToProps(dispatch: DispatchType) {
   return {
-    setForecastItemRedux(forecastItem) {
+    setForecastItemRedux(forecastItem: ForecastItem) {
       const action = atualizarForecastData(forecastItem);
       dispatch(action);
     },
